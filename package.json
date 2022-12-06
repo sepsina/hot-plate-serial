@@ -1,9 +1,19 @@
 {
   "name": "hot-plate-serial",
   "version": "0.0.0",
+  "main": "http://localhost:8964",
+  "node-remote": "http://localhost:8964",
+  "chromium-args": "--disable-raf-throttling",
+  "window": {
+    "width": 500,
+    "height": 780,
+    "min_width": 400,
+    "min_height": 500,
+    "icon": "your-app-logo.png"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve --port=8964\" \"nw .\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -18,6 +28,13 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@types/dom-serial": "^1.0.3",
+    "chart.js": "^4.0.1",
+    "chrome-apps-serialport": "^1.0.9",
+    "concurrently": "^7.6.0",
+    "lpf": "^1.0.0",
+    "ng2-charts": "^4.0.2",
+    "regression": "^2.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -33,6 +50,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "nw": "^0.70.1-sdk",
     "typescript": "~4.7.2"
   }
 }
