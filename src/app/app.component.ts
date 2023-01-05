@@ -35,11 +35,14 @@ export class AppComponent implements OnInit, OnDestroy{
     tsDuty = 50;
 
     tsStatus = '';
-    syncFlag = false;
+    syncFlag = true;
+    syncDis = false;
 
     chartLen = 25;
     chartTime: number[] = [];
     secTime: number[] = [];
+
+    trash = true;
 
     constructor(public serial: SerialService,
                 public events: EventsService,
@@ -124,7 +127,12 @@ export class AppComponent implements OnInit, OnDestroy{
         }
 
         this.lineChartData.datasets[0].data.shift();
-
+        if(msg.runFlag === 1){
+            this.lineChartData.datasets[0].data.push(msg.tcTemp);
+        }
+        else {
+            this.lineChartData.datasets[0].data.push(null);
+        }
         this.ngZone.run(()=>{
             if(msg.runFlag){
                 this.tc = `tc: ${msg.tcTemp.toFixed(1)} degC`;
@@ -133,12 +141,6 @@ export class AppComponent implements OnInit, OnDestroy{
                 this.tc = `tc: --.- degC`;
             }
         });
-        if(msg.runFlag){
-            this.lineChartData.datasets[0].data.push(msg.tcTemp);
-        }
-        else {
-            this.lineChartData.datasets[0].data.push(null);
-        }
         /*
         LPF.smooting = 0.6;
         if(start > 0){
@@ -166,11 +168,25 @@ export class AppComponent implements OnInit, OnDestroy{
             }
         }
         */
+        this.tsRunFlag = 0;
+        if(this.runFlag.nativeElement.checked){
+            this.tsRunFlag = 1;
+        }
         this.tsStatus = `status: ${msg.runFlag?'run':'idle'};`;
         this.tsStatus += ` SP: ${msg.setPoint};`;
         this.tsStatus += ` hist: ${msg.hist};`;
         this.tsStatus += ` duty: ${msg.duty}`;
 
+        this.syncDis = false;
+        if(msg.runFlag === this.tsRunFlag){
+            if(msg.setPoint === this.tsSetPoint){
+                if(msg.hist === this.tsHist){
+                    if(msg.duty === this.tsDuty){
+                        this.syncDis = true;
+                    }
+                }
+            }
+        }
         if(this.syncFlag){
             this.syncFlag = false;
             this.ngZone.run(()=>{

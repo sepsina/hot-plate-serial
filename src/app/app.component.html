@@ -20,10 +20,6 @@
             <button type="button" (click)="this.setThermostat()">Send</button>
         </div>
     </div>
-    <div id="ts_status">
-        {{tsStatus}}
-        <button type="button" (click)="syncFlag = true" [disabled]="syncFlag">Sync</button>
-    </div>
     <div id="graph_cont">
         <div id="tc">
             {{tc}}
@@ -35,5 +31,8 @@
             [legend]="lineChartLegend">
         </canvas>
     </div>
-
+    <div id="ts_status">
+        {{tsStatus}}
+        <button type="button" (click)="syncFlag = true" [disabled]="syncDis">Sync</button>
+    </div>
 </div>

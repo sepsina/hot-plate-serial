@@ -43,6 +43,10 @@
     //border: 1px solid lightgrey;
     gap: 5px;
 }
+#sp_val {
+    text-align: right;
+    padding-right: 4px;
+}
 #set_hist {
     flex: 1 1 100%;
     display: flex;
@@ -54,6 +58,10 @@
     //border: 1px solid lightgrey;
     gap: 5px;
 }
+#hist_val {
+    text-align: right;
+    padding-right: 4px;
+}
 #set_duty {
     flex: 1 1 100%;
     display: flex;
@@ -64,6 +72,10 @@
     //padding-right: 6px;
     //border: 1px solid lightgrey;
     gap: 5px;
+}
+#duty_val {
+    text-align: right;
+    padding-right: 4px;
 }
 #set_thermostat {
     flex: 1 1 100%;

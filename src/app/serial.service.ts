@@ -74,6 +74,7 @@ export class SerialService {
 
     //trash: any;
 
+
     constructor(private events: EventsService,
                 private globals: GlobalsService,
                 private utils: UtilsService) {
@@ -411,6 +412,10 @@ export class SerialService {
      */
     getThermostat() {
 
+        if(this.validPortFlag == false){
+            return;
+        }
+
         let pktBuf = new ArrayBuffer(64);
         let pktData = new Uint8Array(pktBuf);
         let pktView = new DataView(pktBuf);
@@ -458,6 +463,10 @@ export class SerialService {
      *
      */
     setThermostat(tsSet: gIF.tsSet_t) {
+
+        if(this.validPortFlag == false){
+            return;
+        }
 
         let pktBuf = new ArrayBuffer(64);
         let pktData = new Uint8Array(pktBuf);
@@ -511,6 +520,10 @@ export class SerialService {
      *
      */
     checkDevice() {
+
+        if(this.validPortFlag == false){
+            return;
+        }
 
         let pktBuf = new ArrayBuffer(64);
         let pktData = new Uint8Array(pktBuf);
